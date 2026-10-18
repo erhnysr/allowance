@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Nightfall token palette ─────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg-page:      #0B1226;
+  --bg-sidebar:   #0E1630;
+  --bg-panel:     #121B33;
+  --bg-raised:    #18233F;
+  --bg-inset:     #0F1730;
+
+  /* Borders */
+  --border:       #1F2A47;
+  --border-strong:#2A3658;
+  --gauge-track:  #222D4C;
+
+  /* Text */
+  --ink:          #E6EBF5;
+  --ink-muted:    #8C97B2;
+  --ink-soft:     #C3D1F5;
+
+  /* Accent */
+  --accent:       #A9BDF0;
+  --accent-fg:    #0B1226;
+
+  /* States */
+  --ok:           #8FE3C0;
+  --ok-bg:        #15283A;
+  --ok-border:    #1F4A47;
+  --warn:         #F2C27B;
+  --danger:       #F2A0A0;
+  --danger-bg:    #1E1A2E;
+  --danger-border:#5B3440;
+  --frozen:       #9FD3FF;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  background-color: var(--bg-page);
+  color: var(--ink);
+}
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  min-height: 100dvh;
+  background-color: var(--bg-page);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* DM Mono for addresses, amounts, hashes */
+.mono, code, pre {
+  font-family: 'DM Mono', ui-monospace, monospace;
+  font-feature-settings: 'tnum';
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Toast overrides */
+[data-sonner-toaster] [data-type="success"] {
+  background: var(--bg-raised) !important;
+  border: 1px solid var(--ok-border) !important;
+  color: var(--ink) !important;
+}
+[data-sonner-toaster] [data-type="error"] {
+  background: var(--danger-bg) !important;
+  border: 1px solid var(--danger-border) !important;
+  color: var(--danger) !important;
+}

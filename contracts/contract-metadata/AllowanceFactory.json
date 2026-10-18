@@ -1,0 +1,184 @@
+{
+  "contractAddress": "0xd4018d487861eb513e8a756a4e2693d55daff95a",
+  "network": "ARC-TESTNET",
+  "deployerWalletId": "3c2464b2-8369-52e2-a782-800bbeca5396",
+  "contract_code_path": "/home/user/app/contracts/AllowanceFactory.sol",
+  "contract_compiled_code_path": "/home/user/app/contracts/out/AllowanceFactory.sol/AllowanceFactory.json",
+  "contract_network_and_links": {
+    "Arc Testnet": "https://explorer.testnet.arc.io/address/0xd4018d487861eb513e8a756a4e2693d55daff95a"
+  },
+  "contract_deployments": [
+    {
+      "chain": "Arc Testnet",
+      "address": "0xd4018d487861eb513e8a756a4e2693d55daff95a",
+      "explorerUrl": "https://explorer.testnet.arc.io/address/0xd4018d487861eb513e8a756a4e2693d55daff95a",
+      "txHash": "0x22e603d2b1f22e8b12f516ef5cbf4c0e57ffeb062a46032da402d375f3ac7a88",
+      "deployedAt": "2026-10-16T10:28:53.894Z"
+    },
+    {
+      "chain": "Arc Testnet",
+      "address": "0x72159da6a1bb197c04632e7e61b5530b2c0159a2",
+      "explorerUrl": "https://explorer.testnet.arc.io/address/0x72159da6a1bb197c04632e7e61b5530b2c0159a2",
+      "txHash": "0x8ab38e4bc7e801c2ba6fdf9568a36eaac5641de0e559e6c4e612503e4282840d",
+      "deployedAt": "2026-10-16T10:04:07.332Z"
+    },
+    {
+      "chain": "Arc Testnet",
+      "address": "0x2d81436a9bc433498db5b9b8bc7d09f33fd9504f",
+      "explorerUrl": "https://explorer.testnet.arc.io/address/0x2d81436a9bc433498db5b9b8bc7d09f33fd9504f",
+      "txHash": "0xe000953b3938787e1096166c0b28222c5551416f436f5c190851d8b574981fd7",
+      "deployedAt": "2026-10-15T21:14:52.347Z"
+    }
+  ],
+  "abi": [
+    {
+      "type": "constructor",
+      "inputs": [
+        {
+          "name": "_usdc",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "accountsOf",
+      "inputs": [
+        {
+          "name": "owner",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "address[]",
+          "internalType": "address[]"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "createAccount",
+      "inputs": [
+        {
+          "name": "guardian",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "account",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "isAccount",
+      "inputs": [
+        {
+          "name": "account",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "onOwnershipTransferred",
+      "inputs": [
+        {
+          "name": "from",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "to",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "usdc",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "event",
+      "name": "AccountCreated",
+      "inputs": [
+        {
+          "name": "owner",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        },
+        {
+          "name": "account",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        },
+        {
+          "name": "guardian",
+          "type": "address",
+          "indexed": false,
+          "internalType": "address"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "AccountOwnerChanged",
+      "inputs": [
+        {
+          "name": "account",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        },
+        {
+          "name": "from",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        },
+        {
+          "name": "to",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        }
+      ],
+      "anonymous": false
+    }
+  ]
+}

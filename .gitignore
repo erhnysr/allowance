@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment — never commit secrets
+.env
+.env.*
+
+# Foundry build artefacts
+contracts/out/
+contracts/cache/
+cache/
+
+# Debug output
+console.jsonl
+
+# Forge broadcast dry-runs
+broadcast/*/dry-run/
+
+# Logs
+*.log
+
+# Runtime traces
+traces.jsonl
+
+# Mainnet script outputs
+scripts/mainnet/*-result.txt
+scripts/mainnet/AllowanceFactory.bin
