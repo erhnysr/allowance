@@ -346,3 +346,8 @@
 {"level":"debug","message":"[vite] hot updated: /src/App.tsx","timestamp":1792355841880}
 {"level":"debug","message":"[vite] hot updated: /src/index.css","timestamp":1792355841881}
 {"level":"debug","message":"[vite] hot updated: /src/components/Hero.tsx","timestamp":1792355841881}
+{"level":"log","message":"[vite] server connection lost. Polling for restart...","timestamp":1792358372010}
+{"level":"log","message":"[vite] server connection lost. Polling for restart...","timestamp":1792359746623}
+{"level":"log","message":"[vite] server connection lost. Polling for restart...","timestamp":1792359968899}
+{"level":"log","message":"[vite] server connection lost. Polling for restart...","timestamp":1792359968902}
+{"level":"log","message":"[vite] server connection lost. Polling for restart...","timestamp":1792391900983}

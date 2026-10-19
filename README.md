@@ -2,6 +2,8 @@
 
 Onchain spending limits for AI agents, built on Arc.
 
+**Live app:** https://allowance-agents.vercel.app · **Source:** https://github.com/erhnysr/allowance
+
 ## What it is
 
 Allowance lets you give an AI agent a USDC budget with hard onchain limits. Each agent key gets its own policy: a per-payment cap, a refilling period budget, a lifetime cap, an expiry date, and an optional payee allowlist. The limits are enforced by a smart contract, not by the agent itself — an agent with a leaked key can only spend what the policy allows.
