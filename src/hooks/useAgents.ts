@@ -5,7 +5,7 @@ import { useNetwork } from './useNetwork'
 export function useAgentList(accountAddress: `0x${string}` | undefined) {
   const { chainId } = useNetwork()
 
-  const { data: agents, isLoading, refetch } = useReadContract({
+  const { data: agents, isLoading, isError, refetch } = useReadContract({
     address: accountAddress,
     abi: accountAbi,
     functionName: 'getAgents',
@@ -13,7 +13,7 @@ export function useAgentList(accountAddress: `0x${string}` | undefined) {
     query: { enabled: !!accountAddress && !!chainId },
   })
 
-  return { agents: agents as `0x${string}`[] | undefined, isLoading, refetch }
+  return { agents: agents as `0x${string}`[] | undefined, isLoading, isError, refetch }
 }
 
 export function useAgentDetails(
@@ -22,7 +22,7 @@ export function useAgentDetails(
 ) {
   const { chainId } = useNetwork()
 
-  const { data, isLoading, refetch } = useReadContracts({
+  const { data, isLoading, isError, refetch } = useReadContracts({
     contracts: agentAddresses.map(agent => ({
       address: accountAddress,
       abi: accountAbi,
@@ -33,7 +33,7 @@ export function useAgentDetails(
     query: { enabled: !!accountAddress && !!chainId && agentAddresses.length > 0 },
   })
 
-  return { data, isLoading, refetch }
+  return { data, isLoading, isError, refetch }
 }
 
 export function useAvailableNow(

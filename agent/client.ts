@@ -9,6 +9,7 @@ import {
   createPublicClient,
   createWalletClient,
   http,
+  fallback,
   parseUnits,
   formatUnits,
   hashTypedData,
@@ -26,24 +27,38 @@ import { defineChain } from 'viem'
 
 // ── Chain definitions ─────────────────────────────────────────────────────────
 
+const ARC_MAINNET_RPCS = [
+  'https://rpc.mainnet.arc.io',
+  'https://rpc.blockdaemon.mainnet.arc.io',
+  'https://rpc.drpc.mainnet.arc.io',
+  'https://rpc.quicknode.mainnet.arc.io',
+] as const
+
+const ARC_TESTNET_RPCS = [
+  'https://rpc.testnet.arc.io',
+  'https://rpc.blockdaemon.testnet.arc.io',
+  'https://rpc.drpc.testnet.arc.io',
+  'https://rpc.quicknode.testnet.arc.io',
+] as const
+
 const arcMainnet = defineChain({
   id: 5042,
   name: 'Arc Mainnet',
   nativeCurrency: { name: 'USDC', symbol: 'USDC', decimals: 18 },
-  rpcUrls: { default: { http: ['https://rpc.mainnet.arc.io'] } },
+  rpcUrls: { default: { http: [...ARC_MAINNET_RPCS] } },
   blockExplorers: { default: { name: 'Arc Explorer', url: 'https://explorer.arc.io' } },
 })
 
 export const NETWORKS = {
   testnet: {
     chain: arcTestnet,
-    rpc: 'https://rpc.testnet.arc.io',
+    rpcs: ARC_TESTNET_RPCS,
     explorer: 'https://explorer.testnet.arc.io',
     factoryAddress: '0xd4018d487861eb513e8a756a4e2693d55daff95a' as Address,
   },
   mainnet: {
     chain: arcMainnet,
-    rpc: 'https://rpc.mainnet.arc.io',
+    rpcs: ARC_MAINNET_RPCS,
     explorer: 'https://explorer.arc.io',
     factoryAddress: '0xa48fdee3cc6ec2909da8fbec0d2f14032e92c5ec' as Address,
   },
@@ -280,7 +295,8 @@ export function decodeContractError(err: unknown): string {
 
 export function createAllowanceClient(network: NetworkName = 'testnet') {
   const net = NETWORKS[network]
-  const publicClient = createPublicClient({ chain: net.chain, transport: http(net.rpc) })
+  const transport = fallback(net.rpcs.map((url: string) => http(url, { retryCount: 2 })))
+  const publicClient = createPublicClient({ chain: net.chain, transport })
 
   // ── getPolicy ───────────────────────────────────────────────────────────────
   async function getPolicy(account: Address, agentAddress: Address): Promise<Policy> {
@@ -388,7 +404,7 @@ export function createAllowanceClient(network: NetworkName = 'testnet') {
     const walletClient = createWalletClient({
       account: agentAccount,
       chain: net.chain,
-      transport: http(net.rpc),
+      transport,
     })
 
     const signature = await walletClient.signTypedData(typedDataArgs)
@@ -435,7 +451,7 @@ export function createAllowanceClient(network: NetworkName = 'testnet') {
     const walletClient = createWalletClient({
       account: relayerAccount,
       chain: net.chain,
-      transport: http(net.rpc),
+      transport,
     })
 
     const { intent, signature, account } = signed

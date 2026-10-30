@@ -195,6 +195,14 @@ export function AccountHeader({ accountAddress, onBack }: Props) {
         </div>
       )}
 
+      {/* Account data error */}
+      {!data.isLoading && data.isError && (
+        <div className="rounded-[20px] border border-[#5B3440] bg-[#1E1A2E] px-6 py-4 flex items-center justify-between gap-4">
+          <p className="text-sm text-[#F2A0A0]">Couldn't load from Arc.</p>
+          <Button size="sm" variant="secondary" onClick={() => { void data.refetch() }}>Retry</Button>
+        </div>
+      )}
+
       {/* Three-cell account strip */}
       <div className="rounded-[20px] border border-[#1F2A47] bg-[#121B33] overflow-hidden">
         <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[#1F2A47]">

@@ -11,7 +11,7 @@ export function useAccountData(accountAddress: `0x${string}` | undefined) {
     chainId: chainId as number,
   } as const
 
-  const { data, isLoading, refetch } = useReadContracts({
+  const { data, isLoading, isError, refetch } = useReadContracts({
     contracts: [
       { ...contract, functionName: 'balance' },
       { ...contract, functionName: 'owner' },
@@ -40,6 +40,9 @@ export function useAccountData(accountAddress: `0x${string}` | undefined) {
     createdAtBlock,
   ] = data ?? []
 
+  // Consider it an error only if all reads failed (not just some)
+  const allFailed = !!data && data.every(r => r.status === 'failure')
+
   return {
     balance: balance?.result,
     owner: owner?.result,
@@ -52,6 +55,7 @@ export function useAccountData(accountAddress: `0x${string}` | undefined) {
     paymentCount: paymentCount?.result,
     createdAtBlock: createdAtBlock?.result,
     isLoading,
+    isError: isError || allFailed,
     refetch,
   }
 }

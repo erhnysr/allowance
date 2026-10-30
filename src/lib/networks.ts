@@ -4,11 +4,28 @@ import { defineChain, type Chain } from 'viem'
 export const USDC_ADDRESS = '0x3600000000000000000000000000000000000000' as const
 export const USDC_DECIMALS = 6
 
+// All public RPC endpoints for each network — used for fallback transports
+export const ARC_MAINNET_RPCS = [
+  'https://rpc.mainnet.arc.io',
+  'https://rpc.blockdaemon.mainnet.arc.io',
+  'https://rpc.drpc.mainnet.arc.io',
+  'https://rpc.quicknode.mainnet.arc.io',
+] as const
+
+export const ARC_TESTNET_RPCS = [
+  'https://rpc.testnet.arc.io',
+  'https://rpc.blockdaemon.testnet.arc.io',
+  'https://rpc.drpc.testnet.arc.io',
+  'https://rpc.quicknode.testnet.arc.io',
+] as const
+
 export const arcMainnet: Chain = defineChain({
   id: 5042,
   name: 'Arc Mainnet',
   nativeCurrency: { name: 'USDC', symbol: 'USDC', decimals: 18 },
-  rpcUrls: { default: { http: ['https://rpc.mainnet.arc.io'] } },
+  rpcUrls: {
+    default: { http: [...ARC_MAINNET_RPCS] },
+  },
   blockExplorers: {
     default: { name: 'Arc Explorer', url: 'https://explorer.arc.io' },
   },
