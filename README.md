@@ -2,7 +2,7 @@
 
 Onchain spending limits for AI agents, built on Arc.
 
-**Live app:** https://allowance-agents.vercel.app · **Source:** https://github.com/erhnysr/allowance
+**Live app:** https://allowance-agents.vercel.app · **Source:** https://github.com/erhnysr/allowance · **Video:** https://youtu.be/aWAhs6EGqHw
 
 ## What it is
 
@@ -109,6 +109,17 @@ Test files:
 - `CheckAgreement.t.sol` — 16 tests: check() reason codes match payWithSig behaviour
 - `Invariant.t.sol` — 5 invariants: balance accounting, spent totals
 - `Reentrancy.t.sol` — 2 tests: reentrancy guards
+
+## Known limitations
+
+These come from community and external review after the mainnet deployment. The deployed contracts are immutable, so they are documented here and planned for the next version.
+
+- **Re-enabling a revoked key can revive old intents.** If you revoke or remove an agent and later re-add the same key with `setAgent`, a payment intent that key signed earlier, with a long deadline and an unused nonce, becomes valid again. It still has to pass the current policy. Do not re-add a revoked key; register a fresh agent key instead. The app and scripts sign intents that expire after 10 minutes.
+- **`removeAgent` keeps payee rules and counters.** Payee allow flags, caps, blocks and per-payee spent totals stay in place, so a key added again later inherits them.
+- **`setPayee(..., false, ...)` does not block in open mode.** In open mode only `setPayeeBlocked` stops payments to a payee. `allowed = false` only matters in allowlist mode, and a payee cap of 0 means no cap.
+- **The period budget can be spent in one burst.** The bucket starts full and its burst equals the period limit, so a leaked key can use a full period's budget at once. Set the period limit to an amount you are comfortable losing in one go; the lifetime cap is the hard ceiling.
+
+Planned for v2: intents bound to an agent epoch, a minimum interval between payments, and clearing payee rules on `removeAgent`.
 
 ## Security notes
 
